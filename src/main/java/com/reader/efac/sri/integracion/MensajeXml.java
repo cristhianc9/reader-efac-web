@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.sri.integracion;
+package com.reader.efac.sri.integracion;
 
 import java.io.Serializable;
 
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
 public class MensajeXml implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2844577030512592278L;
 

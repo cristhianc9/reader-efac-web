@@ -1,15 +1,15 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.sri.integracion;
+package com.reader.efac.sri.integracion;
 
 /**
  * @author crisheads
  *
  */
 public class ComprobanteAutorizadoTo {
-	
-	
+
+
 	    private String seccion;
 	    private String estadoOnline;
 	    private Long idTipoComprobanteADM;
@@ -119,8 +119,8 @@ public class ComprobanteAutorizadoTo {
 					+ ", estadoAutorizacion=" + estadoAutorizacion + ", fechaAutorizacion=" + fechaAutorizacion
 					+ ", fechaEmision=" + fechaEmision + ", archivoXML=" + archivoXML + "]";
 		}
-	    
-	    
-	
+
+
+
 
 }

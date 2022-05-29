@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.view;
+package com.reader.efac.view;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -19,13 +19,13 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import com.generated.sri.xsd.factura.Factura;
-import com.rimpe.conta.logica.util.ApiRestUtil;
-import com.rimpe.conta.logica.util.ComprobantesToExcelUtil;
-import com.rimpe.conta.logica.util.LecturaReporteTxtSriUtil;
-import com.rimpe.conta.logica.util.LecturaXmlUtil;
-import com.rimpe.conta.sri.integracion.AutorizacionXml;
-import com.rimpe.conta.sri.integracion.ComprobanteAutorizadoTo;
-import com.rimpe.conta.sri.integracion.ComprobanteReporteTo;
+import com.reader.efac.logica.util.ApiRestUtil;
+import com.reader.efac.logica.util.ComprobantesToExcelUtil;
+import com.reader.efac.logica.util.LecturaReporteTxtSriUtil;
+import com.reader.efac.logica.util.LecturaXmlUtil;
+import com.reader.efac.sri.integracion.AutorizacionXml;
+import com.reader.efac.sri.integracion.ComprobanteAutorizadoTo;
+import com.reader.efac.sri.integracion.ComprobanteReporteTo;
 
 /**
  * @author crisheads
@@ -36,7 +36,7 @@ import com.rimpe.conta.sri.integracion.ComprobanteReporteTo;
 public class ConsultaView implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

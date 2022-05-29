@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.sri.integracion.enums;
+package com.reader.efac.sri.integracion.enums;
 
 import java.util.Arrays;
 import java.util.Optional;

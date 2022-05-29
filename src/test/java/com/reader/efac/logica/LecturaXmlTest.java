@@ -1,7 +1,7 @@
-/** 
- * 
+/**
+ *
  */
-package com.rimpe.conta.logica;
+package com.reader.efac.logica;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,13 +20,13 @@ import java.util.stream.Stream;
 import org.junit.Test;
 
 import com.generated.sri.xsd.factura.Factura;
-import com.rimpe.conta.logica.util.ApiRestUtil;
-import com.rimpe.conta.logica.util.ComprobantesToExcelUtil;
-import com.rimpe.conta.logica.util.LecturaReporteTxtSriUtil;
-import com.rimpe.conta.logica.util.LecturaXmlUtil;
-import com.rimpe.conta.sri.integracion.AutorizacionXml;
-import com.rimpe.conta.sri.integracion.ComprobanteAutorizadoTo;
-import com.rimpe.conta.sri.integracion.ComprobanteReporteTo;
+import com.reader.efac.logica.util.ApiRestUtil;
+import com.reader.efac.logica.util.ComprobantesToExcelUtil;
+import com.reader.efac.logica.util.LecturaReporteTxtSriUtil;
+import com.reader.efac.logica.util.LecturaXmlUtil;
+import com.reader.efac.sri.integracion.AutorizacionXml;
+import com.reader.efac.sri.integracion.ComprobanteAutorizadoTo;
+import com.reader.efac.sri.integracion.ComprobanteReporteTo;
 
 /**
  * @author crisheads
@@ -34,7 +34,7 @@ import com.rimpe.conta.sri.integracion.ComprobanteReporteTo;
  */
 public class LecturaXmlTest {
 
-	private static final String CARPETA_PRINCIPAL = "G:\\Mi unidad\\Proyectos\\RIMPE Contribuyentes\\origen\\0703931600\\";
+	private static final String CARPETA_PRINCIPAL = "/reader-efac-web/src/test/resource/";
 
 //	@Test
 	public void testFiles() {

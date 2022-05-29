@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.logica.util;
+package com.reader.efac.logica.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -16,7 +16,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import com.rimpe.conta.sri.integracion.AutorizacionXml;
+import com.reader.efac.sri.integracion.AutorizacionXml;
 
 /**
  * @author crist

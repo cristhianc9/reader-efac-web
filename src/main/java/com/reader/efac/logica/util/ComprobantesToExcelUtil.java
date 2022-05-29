@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.logica.util;
+package com.reader.efac.logica.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -27,9 +27,9 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import com.generated.sri.xsd.factura.Factura;
 import com.generated.sri.xsd.factura.Factura.Detalles.Detalle;
+import com.reader.efac.sri.integracion.enums.TablaImpuestoEnum;
+import com.reader.efac.sri.integracion.enums.TablaTarifaIvaEnum;
 import com.generated.sri.xsd.factura.Impuesto;
-import com.rimpe.conta.sri.integracion.enums.TablaImpuestoEnum;
-import com.rimpe.conta.sri.integracion.enums.TablaTarifaIvaEnum;
 
 /**
  * @author crisheads

@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.sri.integracion;
+package com.reader.efac.sri.integracion;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,7 +13,7 @@ import java.util.Objects;
 public class ComprobanteReporteTo implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 3578863605858381639L;
 
@@ -155,9 +155,7 @@ public class ComprobanteReporteTo implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		ComprobanteReporteTo other = (ComprobanteReporteTo) obj;
 		return Objects.equals(claveAcceso, other.claveAcceso) && Objects.equals(comprobante, other.comprobante)

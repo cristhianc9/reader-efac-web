@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.logica.util;
+package com.reader.efac.logica.util;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
@@ -31,7 +31,7 @@ public final class ApiRestUtil {
 			"application/json;charset=utf-8");
 
 	public static <T> T leerAutorizacionXmlPorInternet(final String claveAcceso, Class<? extends T> clase) {
-		MultivaluedMap<String, String> mapa = new MultivaluedHashMap<String, String>();
+		MultivaluedMap<String, String> mapa = new MultivaluedHashMap<>();
 		mapa.add("claveAcceso", claveAcceso);
 		try {
 			Response response = solicitud.post(Entity.form(mapa));

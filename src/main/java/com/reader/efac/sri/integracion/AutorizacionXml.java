@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package com.rimpe.conta.sri.integracion;
+package com.reader.efac.sri.integracion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 public class AutorizacionXml implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 5328371577207345553L;
 
@@ -41,7 +41,7 @@ public class AutorizacionXml implements Serializable {
 
 	@XmlElementWrapper(name = "mensajes")
 	@XmlElement(name = "mensaje")
-	private List<MensajeXml> mensajes = new ArrayList<MensajeXml>();
+	private List<MensajeXml> mensajes = new ArrayList<>();
 
 	public String getEstado() {
 		return estado;

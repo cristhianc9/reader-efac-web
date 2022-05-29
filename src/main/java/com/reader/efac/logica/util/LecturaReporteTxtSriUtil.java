@@ -1,4 +1,4 @@
-package com.rimpe.conta.logica.util;
+package com.reader.efac.logica.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.rimpe.conta.sri.integracion.ComprobanteReporteTo;
+import com.reader.efac.sri.integracion.ComprobanteReporteTo;
 
 public final class LecturaReporteTxtSriUtil {
 
