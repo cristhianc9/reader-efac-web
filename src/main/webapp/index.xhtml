@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Reader - Facturación Electrónica</title>
+</h:head>
+<h:body>
+
+	<h:form>
+
+		<h:outputText value="Message:#{pfExceptionHandler.message}" />
+		<h:outputText value="#{pfExceptionHandler.formattedStackTrace}"
+			escape="false" />
+
+		<p:ajaxExceptionHandler
+			type="javax.faces.application.ViewExpiredException"
+			update="exceptionDialog" onexception="PF('exceptionDialog').show();" />
+		<p:dialog id="exceptionDialog"
+			header="Exception: #{pfExceptionHandler.type} occured!"
+			widgetVar="exceptionDialog" height="500px">
+    Message: #{pfExceptionHandler.message} <br />
+    StackTrace: <h:outputText
+				value="#{pfExceptionHandler.formattedStackTrace}" escape="false" />
+			<p:button onclick="document.location.href = document.location.href;"
+				value="Reload!" />
+		</p:dialog>
+
+		<p:spacer height="20"></p:spacer>
+
+
+		<div class="card">
+			<p:fileUpload listener="#{consultaView.handleFileUpload}"
+				mode="advanced" dragDropSupport="false" multiple="true"
+				update="messages divDescarga" sizeLimit="10000000" fileLimit="3"
+				allowTypes="/(\.|\/)(txt)$/" maxChunkSize="1000000" />
+
+			<p:growl id="messages" showDetail="true" keepAlive="true" />
+		</div>
+
+		<div jsf:id="divDescarga" class="card">
+			<p:commandButton value="Descargar" ajax="false" actionListener="#{consultaView.generarArchivo}" icon="pi pi-arrow-down"
+				styleClass="ui-button-outlined">
+				<p:fileDownload value="#{consultaView.streamedContent}"  />
+			</p:commandButton>
+		</div>
+
+	</h:form>
+</h:body>
+</html>

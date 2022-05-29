@@ -1,0 +1,187 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.rimpe.conta</groupId>
+	<artifactId>rimpe-conta-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+
+	<name>rimpe-conta-web</name>
+	<url>https://github.com/datenmuehle/java11-jsf-primefaces-archetype</url>
+
+	<properties>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+
+		<!-- maven plugins -->
+		<jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
+		<lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
+
+		<commons-io.version>2.11.0</commons-io.version>
+		<commons-lang3.version>3.12.0</commons-lang3.version>
+
+	</properties>
+
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
+			<version>2.3</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- utils -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.2.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+
+		<!-- Unit testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- primefaces components -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>11.0.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${lifecycle-mapping-plugin.version}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>jaxb2-maven-plugin</artifactId>
+										<versionRange>[${jaxb2-maven-plugin.version},)</versionRange>
+										<goals>
+											<goal>schemagen</goal>
+											<goal>xjc</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<systemPropertyVariables>
+							<javax.xml.accessExternalSchema>all</javax.xml.accessExternalSchema>
+						</systemPropertyVariables>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- xjc -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>${jaxb2-maven-plugin.version}</version>
+				<configuration>
+					<xjbSources></xjbSources>
+					<locale>en</locale>
+				</configuration>
+				<executions>
+					<execution>
+						<id>SRI_COMPROBANTES_ELECTRONICOS</id>
+						<goals>
+							<!--goal>xjc</goal-->
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/src/main/resources/sri/comprobantes/electronicos/xsd/lasted/factura_V2.1.0.xsd</source>
+
+
+							</sources>
+							<verbose>false</verbose>
+							<extension>true</extension>
+							<packageName>generated.sri.xsd</packageName>
+							<encoding>UTF-8</encoding>
+
+							<clearOutputDir>false</clearOutputDir>
+							<locale>en</locale>
+
+						</configuration>
+
+					</execution>
+
+				</executions>
+
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
