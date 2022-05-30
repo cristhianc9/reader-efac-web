@@ -6,8 +6,11 @@ package com.reader.efac.logica;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.enterprise.inject.New;
 
 import org.junit.Test;
 
@@ -100,37 +105,31 @@ public class LecturaXmlTest {
 
 	@Test
 	public void leerReporte() {
+		try {
+			InputStream input = this.getClass().getResourceAsStream("/");
+			List<ComprobanteReporteTo> listaReporte = LecturaReporteTxtSriUtil.leerArchivoTxt(input);
 
-		Set<String> reporteComprobantesRecibidos = leerDirectorio(CARPETA_PRINCIPAL, ".txt");
-		reporteComprobantesRecibidos.forEach(nombreArchivo -> {
-			try {
-				List<ComprobanteReporteTo> listaReporte = LecturaReporteTxtSriUtil.leerArchivoTxt(Files
-						.newInputStream(Paths.get(CARPETA_PRINCIPAL.concat(nombreArchivo)), StandardOpenOption.READ));
-				System.out.println(
-						"Total de comprobantes => " + listaReporte.size() + " para el archivo " + nombreArchivo);
+			List<Factura> facturasLeidas = new ArrayList<>();
 
-				List<Factura> facturasLeidas = new ArrayList<>();
+			listaReporte.forEach(comprobanteReporte -> {
+				ComprobanteAutorizadoTo autorizacionOnLine = ApiRestUtil.leerAutorizacionXmlPorInternet(
+						comprobanteReporte.getClaveAcceso(), ComprobanteAutorizadoTo.class);
 
-				listaReporte.forEach(comprobanteReporte -> {
-					ComprobanteAutorizadoTo autorizacionOnLine = ApiRestUtil.leerAutorizacionXmlPorInternet(
-							comprobanteReporte.getClaveAcceso(), ComprobanteAutorizadoTo.class);
+				AutorizacionXml autorizacionXml = (AutorizacionXml) LecturaXmlUtil.convertirComprobanteXml(
+						autorizacionOnLine.getArchivoXML().getBytes(StandardCharsets.UTF_8), AutorizacionXml.class);
 
-					AutorizacionXml autorizacionXml = (AutorizacionXml) LecturaXmlUtil.convertirComprobanteXml(
-							autorizacionOnLine.getArchivoXML().getBytes(StandardCharsets.UTF_8), AutorizacionXml.class);
+				Factura factura = (Factura) LecturaXmlUtil.convertirComprobanteXml(
+						autorizacionXml.getComprobante().getBytes(StandardCharsets.UTF_8), Factura.class);
 
-					Factura factura = (Factura) LecturaXmlUtil.convertirComprobanteXml(
-							autorizacionXml.getComprobante().getBytes(StandardCharsets.UTF_8), Factura.class);
+				facturasLeidas.add(factura);
+			});
 
-					facturasLeidas.add(factura);
-				});
+			byte[] resultado = ComprobantesToExcelUtil.generarExcel2(facturasLeidas);
+			System.out.println("Good Job!" + resultado.toString());
 
-				byte[] resultado = ComprobantesToExcelUtil.generarExcel2(facturasLeidas);
-				System.out.println("Good Job!" + resultado.toString());
-
-			} catch (IOException e) {
-				System.err.println("Error con el archivo " + nombreArchivo + " msg: " + e.getMessage());
-			}
-		});
+		} catch (IOException e) {
+			System.err.println("Error al leer archivo msg: " + e.getMessage());
+		}
 
 	}
 
