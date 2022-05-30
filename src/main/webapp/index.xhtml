@@ -13,9 +13,6 @@
 
 	<h:form>
 
-		<h:outputText value="Message:#{pfExceptionHandler.message}" />
-		<h:outputText value="#{pfExceptionHandler.formattedStackTrace}"
-			escape="false" />
 
 		<p:ajaxExceptionHandler
 			type="javax.faces.application.ViewExpiredException"
@@ -23,7 +20,7 @@
 		<p:dialog id="exceptionDialog"
 			header="Exception: #{pfExceptionHandler.type} occured!"
 			widgetVar="exceptionDialog" height="500px">
-    Message: #{pfExceptionHandler.message} <br />
+    Mensaje: #{pfExceptionHandler.message} <br />
     StackTrace: <h:outputText
 				value="#{pfExceptionHandler.formattedStackTrace}" escape="false" />
 			<p:button onclick="document.location.href = document.location.href;"
@@ -43,9 +40,10 @@
 		</div>
 
 		<div jsf:id="divDescarga" class="card">
-			<p:commandButton value="Descargar" ajax="false" actionListener="#{consultaView.generarArchivo}" icon="pi pi-arrow-down"
-				styleClass="ui-button-outlined">
-				<p:fileDownload value="#{consultaView.streamedContent}"  />
+			<p:commandButton value="Descargar" ajax="false"
+				actionListener="#{consultaView.generarArchivo}"
+				icon="pi pi-arrow-down" styleClass="ui-button-outlined">
+				<p:fileDownload value="#{consultaView.streamedContent}" />
 			</p:commandButton>
 		</div>
 
