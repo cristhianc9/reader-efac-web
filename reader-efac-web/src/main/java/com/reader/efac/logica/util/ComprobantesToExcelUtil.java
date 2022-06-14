@@ -27,9 +27,10 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import com.generated.sri.xsd.factura.Factura;
 import com.generated.sri.xsd.factura.Factura.Detalles.Detalle;
+import com.generated.sri.xsd.factura.Factura.InfoAdicional.CampoAdicional;
+import com.generated.sri.xsd.factura.Impuesto;
 import com.reader.efac.sri.integracion.enums.TablaImpuestoEnum;
 import com.reader.efac.sri.integracion.enums.TablaTarifaIvaEnum;
-import com.generated.sri.xsd.factura.Impuesto;
 
 /**
  * @author crisheads
@@ -37,7 +38,7 @@ import com.generated.sri.xsd.factura.Impuesto;
  */
 public final class ComprobantesToExcelUtil {
 
-	private static final String FORMATO_DD_MM_YYYY = "dd/mm/yyyy";
+	private static final String FORMATO_DD_MM_YYYY = "dd/MM/yyyy";
 	private static final DateFormat FORMATO_FECHA_CORTA = new SimpleDateFormat(FORMATO_DD_MM_YYYY);
 
 	public static byte[] generarExcel2(final List<Factura> facturas) throws FileNotFoundException, IOException {
@@ -47,7 +48,7 @@ public final class ComprobantesToExcelUtil {
 				"Nombre o Razon social del comprador", "CLAVE DE ACCESO", "DETALLE DE LA COMPRA", "Cantidad",
 				"Precio unitario", "Precio sin subsidio", "Descuento USD", "Total sin impuestos USD", "IVA 0%",
 				"IVA 12%", "IVA 14%", "No Objeto de impuesto", "Exento de IVA", "IVA diferenciado", "ICE", "IRBPNR",
-				"Total");
+				"Total", "Info adicional");
 
 		try (Workbook wb = new SXSSFWorkbook(100)) {
 			CreationHelper createHelper = wb.getCreationHelper();
@@ -228,6 +229,17 @@ public final class ComprobantesToExcelUtil {
 
 				total = total.add(totalTarifaICE).add(totalTarifaIRBPNR);
 				crearCelda(columna++, total, row, cellStyle);
+
+				if (Objects.nonNull(factura.getInfoAdicional())) {
+					List<CampoAdicional> listaCampoAdicional = factura.getInfoAdicional().getCampoAdicional();
+					StringBuilder campoAdicionalBuilder = new StringBuilder();
+					for (CampoAdicional campoAdicional : listaCampoAdicional) {
+						campoAdicionalBuilder.append(
+								campoAdicional.getNombre().concat(":").concat(campoAdicional.getValue()).concat("|"));
+					}
+
+					crearCelda(columna++, campoAdicionalBuilder.toString(), row, cellStyle);
+				}
 
 			}
 
