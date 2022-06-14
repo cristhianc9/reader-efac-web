@@ -11,8 +11,8 @@
 	<url>https://github.com/datenmuehle/java11-jsf-primefaces-archetype</url>
 
 	<properties>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<!-- maven plugins -->
 		<jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
