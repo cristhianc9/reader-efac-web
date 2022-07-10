@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import com.generated.sri.xsd.factura.Factura;
 import com.reader.efac.logica.util.ApiRestUtil;
@@ -36,7 +35,6 @@ public class LecturaXmlTest {
 
 	private static final String CARPETA_PRINCIPAL = "/reader-efac-web/src/test/resource/";
 
-//	@Test
 	public void testFiles() {
 		Set<String> archivos = leerDirectorio(CARPETA_PRINCIPAL, ".xml");
 		List<Factura> facturasLeidas = new ArrayList<>();
@@ -74,7 +72,6 @@ public class LecturaXmlTest {
 		return factura;
 	}
 
-//	@Test
 	public void leerComprobanteOnline() throws FileNotFoundException, IOException {
 		try {
 			ComprobanteAutorizadoTo autorizacionOnLine = ApiRestUtil.leerAutorizacionXmlPorInternet(
@@ -98,8 +95,7 @@ public class LecturaXmlTest {
 
 	}
 
-	@Test
-	public void leerReporte() {
+	public void leerReporte() throws IllegalArgumentException {
 		try {
 
 			String path = "src/test/resource/1709492324001_Recibidos.txt";
@@ -122,9 +118,6 @@ public class LecturaXmlTest {
 				});
 
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

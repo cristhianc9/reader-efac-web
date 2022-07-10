@@ -11,21 +11,7 @@
 </h:head>
 <h:body>
 
-	<h:form>
-
-
-		<p:ajaxExceptionHandler
-			type="javax.faces.application.ViewExpiredException"
-			update="exceptionDialog" onexception="PF('exceptionDialog').show();" />
-		<p:dialog id="exceptionDialog"
-			header="Exception: #{pfExceptionHandler.type} occured!"
-			widgetVar="exceptionDialog" height="500px">
-    Mensaje: #{pfExceptionHandler.message} <br />
-    StackTrace: <h:outputText
-				value="#{pfExceptionHandler.formattedStackTrace}" escape="false" />
-			<p:button onclick="document.location.href = document.location.href;"
-				value="Reload!" />
-		</p:dialog>
+	<h:form id="frmArchivosFacturaElectronica">
 
 		<p:spacer height="20"></p:spacer>
 
@@ -33,18 +19,46 @@
 		<div class="card">
 			<p:fileUpload listener="#{consultaView.handleFileUpload}"
 				mode="advanced" dragDropSupport="false" multiple="true"
-				update="messages divDescarga" sizeLimit="10000000" fileLimit="3"
+				update="messages tblResultado" sizeLimit="10000000" fileLimit="10"
 				allowTypes="/(\.|\/)(txt)$/" maxChunkSize="1000000" />
 
 			<p:growl id="messages" showDetail="true" keepAlive="true" />
 		</div>
 
-		<div jsf:id="divDescarga" class="card">
-			<p:commandButton value="Descargar" ajax="false"
-				actionListener="#{consultaView.generarArchivo}"
-				icon="pi pi-arrow-down" styleClass="ui-button-outlined">
-				<p:fileDownload value="#{consultaView.streamedContent}" />
-			</p:commandButton>
+
+		<div jsf:id="tblResultado" class="card">
+			<p:dataTable var="reporte"
+				value="#{consultaView.listaResultadoReporteComprobante}"
+				rendered="${not empty consultaView.listaResultadoReporteComprobante}">
+				<p:column headerText="Nombre archivo">
+					<h:outputText value="#{reporte.nombreArchivo}" />
+				</p:column>
+
+				<p:column headerText="Número total de comprobantes">
+					<h:outputText value="#{reporte.numeroComprobantesTotales}" />
+				</p:column>
+
+				<p:column rendered="false"
+					headerText="Número de comprobantes leídos">
+					<h:outputText value="#{reporte.numeroComprobantesLeidos}" />
+				</p:column>
+
+				<p:column headerText="Cargado">
+					<h:outputText value="#{reporte.inicioProcesamiento}" />
+				</p:column>
+				<p:column rendered="false" headerText="Finaliza">
+					<h:outputText value="#{reporte.finalizaProcesamiento}" />
+				</p:column>
+
+				<p:column headerText="Archivo excel">
+					<p:commandButton value="Generar y descargar"
+						title="Generar y descargar archivo excel" ajax="false"
+						icon="pi pi-cloud-download"
+						update="frmArchivosFacturaElectronica:tblResultado frmArchivosFacturaElectronica:messages">
+						<p:fileDownload value="#{reporte.archivoGenerado}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
 		</div>
 
 	</h:form>
