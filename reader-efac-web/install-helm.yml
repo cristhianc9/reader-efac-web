@@ -4,7 +4,7 @@ build:
   enabled: true
   mode: s2i
   uri: 'https://github.com/cristhianc9/reader-efac-web.git'
-  ref: 7.4.x
+  ref: main
   contextDir: reader-efac-web
   output:
     kind: ImageStreamTag
